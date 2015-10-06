@@ -15,7 +15,7 @@
 
 <div class="container-fluid">
     <div id="map-canvas"></div>
-    <div class="row" id="spotInfo">
+    <div class="" id="spotInfo">
         <div class="col-xs-6 col-sm-6">
             <div class="itemImage thumbnail"></div>
         </div>

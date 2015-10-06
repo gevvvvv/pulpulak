@@ -31,9 +31,10 @@ $(document).ready(function(){/* google maps ------------------------------------
           position: 'top_right',
           content: '<img src="/images/refresh.png" />',
           style: {
-            margin: '0 10px',
+            margin: '10px',
             'border-radius': '20px',
-            'box-shadow': '2px 2px 2px #666'
+            'box-shadow': '2px 2px 2px #666',
+            'display' : 'none'
 
           },
           events: {

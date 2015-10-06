@@ -97,7 +97,7 @@ $(document).ready(function(){/* google maps ------------------------------------
               } 
             });
             //http://pulpulak.club/locations
-            $('#spotInfo .itemImage').html("<img src='http://pulpulak.club"+data[0].image+"' width = '75px' />");
+            $('#spotInfo .itemImage').html("<img src='http://pulpulak.club"+data[0].image+"' />");
             $('#spotInfo .itemName').html(data[0].name);
             $('#spotInfo .itemLocationText').html(data[0].address);
             $('#spotInfo .itemInfoText').html(data[0].description);

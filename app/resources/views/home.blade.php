@@ -17,23 +17,36 @@
 <div class="container-fluid">
     <div id="map-canvas"></div>
     <div class="row" id="spotInfo">
-        <div class="row">
-            <div class="col-md-6 itemImage">1</div>
-            <div class="col-md-6 itemName">2</div>
+        <div class="col-xs-6 col-sm-6">
+            <div class="itemImage thumbnail">1</div>
         </div>
-        <div class="row itemLocation">
-            <div class="col-md-6 sized">Location: </div>
-            <div class="col-md-6 itemLocationText"></div>
-        </div>
-        <div class="row itemInfo">
-            <div class="col-md-6 sized">Information: </div>
-            <div class="col-md-6 itemInfoText"></div>
-        </div>
-        <div class="row itemInfo">
-            <p class="col-md-12 report">Report</p>
+        <div class="col-xs-6 col-sm-6">
+            <div class="caption">
+                <h1 class="itemName">2</h1>
+                <p class="itemLocationText"></p>
+                <p class="itemInfoText"></p>
+                <button class="btn btn-warning report">Report</button>
+            </div>
         </div>
     </div>
+</div>
 
+<div class="modal fade" id="modal-add">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

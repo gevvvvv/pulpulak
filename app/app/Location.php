@@ -12,19 +12,16 @@ class Location extends Model
 
     protected static function getNearbyLocations($lat, $lon)
     {
-        $max_radius = 10;
-        $radius = 1;
+        $max_radius = 100;
+        $radius = 100;
         $locations = null;
 
-        do {
-            $locations = Location::select(DB::raw("*, (6371 * acos(cos(radians(?)) * cos(radians(lat)) * cos(radians(lon) - radians(?)) + sin(radians(?)) * sin(radians(lat)))) AS distance"))
-                ->having("distance", "<", $radius)
-                ->orderBy("distance")
-                ->setBindings([$lat, $lon, $lat])
-                ->get();
+        $locations = Location::select(DB::raw("*, (6371 * acos(cos(radians(?)) * cos(radians(lat)) * cos(radians(lon) - radians(?)) + sin(radians(?)) * sin(radians(lat)))) AS distance"))
+            ->having("distance", "<", $radius)
+            ->orderBy("distance")
+            ->setBindings([$lat, $lon, $lat])
+            ->get();
 
-            $radius++;
-        } while (count($locations) == 0 && $radius <= $max_radius);
 
         if(count($locations) > 0){
             foreach($locations as $location){

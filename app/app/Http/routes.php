@@ -1,5 +1,5 @@
 <?php
 
-Route::get('locations/nearby', 'LocationController@nearby');
+Route::get('locations/nearest', 'LocationController@nearest');
 Route::resource('locations', 'LocationController');
 Route::resource('locations.reports', 'LocationReportController');

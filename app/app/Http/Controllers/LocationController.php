@@ -14,7 +14,7 @@ class LocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $lat = Input::get('lat');
         $lon = Input::get('lon');
@@ -29,7 +29,7 @@ class LocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function nearby()
+    public function nearest()
     {
         $lat = Input::get('lat');
         $lon = Input::get('lon');

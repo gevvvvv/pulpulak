@@ -12,7 +12,7 @@ class Location extends Model
 
     protected static function getNearbyLocations($lat, $lon)
     {
-        $max_radius = 6;
+        $max_radius = 5;
         $radius = 1;
         $locations = null;
 
@@ -24,7 +24,7 @@ class Location extends Model
                 ->get();
 
             $radius++;
-        } while (count($locations) == null && $radius <= $max_radius);
+        } while (count($locations) == 0 && $radius <= $max_radius);
 
         return $locations;
 

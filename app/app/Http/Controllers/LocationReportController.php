@@ -4,38 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Location;
-use Illuminate\Support\Facades\Input;
+use App\Http\Controllers\Controller;
 
-class LocationController extends Controller
+class LocationReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $lat = Input::get('lat');
-        $lon = Input::get('lon');
-
-        $locations = Location::getNearbyLocations($lat, $lon);
-
-        return response()->json($locations);
-    }
-
-    /**
-     * Display the nearest specified resource based on geography.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function nearby()
-    {
-        $lat = Input::get('lat');
-        $lon = Input::get('lon');
-
-        $location = Location::getNearestLocation($lat, $lon);
-        return response()->json($location);
+        return response()->json([]);
     }
 
     /**
@@ -51,7 +31,7 @@ class LocationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -62,7 +42,7 @@ class LocationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,7 +53,7 @@ class LocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -84,8 +64,8 @@ class LocationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,7 +76,7 @@ class LocationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

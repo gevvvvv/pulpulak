@@ -3,9 +3,9 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>2 column Google maps, foursquare (outer scroll)</title>
+    <title>Pulpulak Club</title>
     <meta name="generator" content="Bootply" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,11 +18,11 @@
     <div id="map-canvas"></div>
     <div class="row" id="spotInfo">
         <div class="col-xs-6 col-sm-6">
-            <div class="itemImage thumbnail">1</div>
+            <div class="itemImage thumbnail"></div>
         </div>
         <div class="col-xs-6 col-sm-6">
             <div class="caption">
-                <h1 class="itemName">2</h1>
+                <h1 class="itemName"></h1>
                 <p class="itemLocationText"></p>
                 <p class="itemInfoText"></p>
                 <button class="btn btn-warning report">Report</button>

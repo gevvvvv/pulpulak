@@ -29,21 +29,7 @@ $(document).ready(function(){/* google maps ------------------------------------
 
         map.addControl({
           position: 'bottom_right',
-          content: '<img src="./images/refresh.png" />',
-          style: {
-            margin: '50px 0',
-            'border-radius': '20px',
-            'box-shadow': '2px 2px 2px #666'
-
-          },
-          events: {
-            click: function(){
-            }
-          }
-        });
-        map.addControl({
-          position: 'bottom_right',
-          content: '<img src="./images/refresh.png" />',
+          content: '<img src="/images/refresh.png" />',
           style: {
             margin: '50px 0',
             'border-radius': '20px',
@@ -58,7 +44,7 @@ $(document).ready(function(){/* google maps ------------------------------------
                 var image = data[0].image;
               else
                 var image = '/location_images/images/default.jpg';
-              $('#spotInfo .itemImage').html("<img src='http://pulpulak.club"+image+"' width = '75px' />");
+              $('#spotInfo .itemImage').html("<img src='http://pulpulak.club"+image+"' />");
               $('#spotInfo .itemName').html(data[0].name);
               $('#spotInfo .itemLocationText').html(data[0].address);
               $('#spotInfo .itemInfoText').html(data[0].description);
@@ -123,7 +109,7 @@ $(document).ready(function(){/* google maps ------------------------------------
             var image = data[0].image;
           else
             var image = '/location_images/images/default.jpg';
-          $('#spotInfo .itemImage').html("<img src='http://pulpulak.club"+image+"' width = '75px' />");
+          $('#spotInfo .itemImage').html("<img src='http://pulpulak.club"+image+"' />");
           $('#spotInfo .itemName').html(data[0].name);
           $('#spotInfo .itemLocationText').html(data[0].address);
           $('#spotInfo .itemInfoText').html(data[0].description);
@@ -139,7 +125,7 @@ $(document).ready(function(){/* google maps ------------------------------------
                   var image = v.image;
                 else
                   var image = '/location_images/images/default.jpg';
-                $('#spotInfo .itemImage').html("<img src='http://pulpulak.club"+image+"' width = '75px' />");
+                $('#spotInfo .itemImage').html("<img src='http://pulpulak.club"+image+"' />");
                 $('#spotInfo .itemName').html(v.name);
                 $('#spotInfo .itemLocationText').html(v.address);
                 $('#spotInfo .itemInfoText').html(v.description);

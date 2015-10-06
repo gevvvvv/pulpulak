@@ -28,10 +28,10 @@ $(document).ready(function(){/* google maps ------------------------------------
       $.get( "http://pulpulak.club/locations?lat="+my_lat+"&lon="+my_lng, function( data ) {
 
         map.addControl({
-          position: 'bottom_right',
+          position: 'top_right',
           content: '<img src="/images/refresh.png" />',
           style: {
-            margin: '50px 0',
+            margin: '10px 0',
             'border-radius': '20px',
             'box-shadow': '2px 2px 2px #666'
 

@@ -15,7 +15,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function ($table) {
             $table->increments('id');
             $table->integer('location_id')->unsigned();
-            $table->text('reason');
+            $table->text('reason')->nullable();
             $table->boolean('reviewed');
             $table->timestamps();
 

@@ -74,13 +74,11 @@ class LocationController extends Controller
 
         if ($request->hasFile('image')) {
             $path = public_path() . DIRECTORY_SEPARATOR . 'location_images' . DIRECTORY_SEPARATOR . $location->id;
-            if(!file_exists($path)){
+            if (!file_exists($path)) {
                 mkdir($path);
             }
             $request->file('image')->move($path, 'image.jpg');
         }
-
-
 
     }
 

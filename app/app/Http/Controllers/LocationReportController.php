@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\LocationReport;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -36,8 +37,16 @@ class LocationReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $location_id = $request->input('location_id');
+        $reason = $request->input('reason');
+
+        $report = new LocationReport();
+        $report->reason = $reason;
+        $report->location_id = $location_id;
+        $report->save();
+
     }
+
 
     /**
      * Display the specified resource.

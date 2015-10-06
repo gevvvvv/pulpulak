@@ -25,7 +25,6 @@
                 <h1 class="itemName"></h1>
                 <p class="itemLocationText"></p>
                 <p class="itemInfoText"></p>
-                <button class="btn btn-warning report">Report</button>
             </div>
         </div>
     </div>

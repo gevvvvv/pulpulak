@@ -1,0 +1,38 @@
+/*
+A custom Bootstrap 3.1 theme from http://bootply.com\
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+
+
+/* all map containers must be full height */
+html, body, .container-fluid, .row, .map { height: 100% }
+
+#map-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width:100%;
+}
+.overlay {
+    display: block;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+    line-height: 10px;
+    opacity: 0.8;
+    background: #4477aa;
+    border: solid 2px #336699;
+    border-radius: 4px;
+    box-shadow: 2px 2px 3px #333;
+    text-shadow: 1px 1px 1px #666;
+    padding: 0 4px;
+}
+.itemImage{
+    float: left;
+}

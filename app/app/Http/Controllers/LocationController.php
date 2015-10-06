@@ -56,7 +56,29 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lat = $request->input('lat');
+        $lon = $request->input('lon');
+        $address = $request->input('address');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $udid = $request->input('udid');
+
+        $location = new Location();
+        $location->lat = $lat;
+        $location->lon = $lon;
+        $location->name = $name;
+        $location->address = $address;
+        $location->description = $description;
+        $location->udid = $udid;
+        $location->save();
+
+        if ($request->hasFile('image')) {
+            $path = public_path() . DIRECTORY_SEPARATOR . 'location_images' . DIRECTORY_SEPARATOR . $location->id;
+            $request->file('image')->move($path, 'image.jpg');
+        }
+
+
+
     }
 
     /**

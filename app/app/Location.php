@@ -26,6 +26,18 @@ class Location extends Model
             $radius++;
         } while (count($locations) == 0 && $radius <= $max_radius);
 
+        if(count($locations) > 0){
+            foreach($locations as $location){
+                $image_path = "/location_images/{$location->id}/image.jpg";
+                $image_path_local = public_path() . DIRECTORY_SEPARATOR . 'location_images' . DIRECTORY_SEPARATOR . $location->id . DIRECTORY_SEPARATOR . 'image.jpg';
+                if(file_exists($image_path_local)){
+                    $location->image = $image_path;
+                } else {
+                    $location->image = null;
+                }
+            }
+        }
+
         return $locations;
 
     }

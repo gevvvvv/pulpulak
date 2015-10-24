@@ -82,36 +82,36 @@ $(document).ready(function(){
 			// alert("Done!");
 		}
 	});
+	pulpulakDestination = function (originLat, originLon, lat, lon){
+		map.drawRoute({
+			origin: [originLat, originLon],
+			destination: [lat, lon],
+			travelMode: 'walking',
+			strokeColor: '#131540',
+			strokeOpacity: 0.6,
+			strokeWeight: 6,
+			callback: function(e) {
+				legs = e.legs[0];
+				var distance = legs.distance.text;
+				var duration = legs.duration.text;
+				var steps = Math.round(legs.steps.length/2);
+				var middlePoint = legs.steps[steps];
+				map.drawOverlay({
+					lat: (originLat + parseFloat(lat))/2,
+					lng: (originLon + parseFloat(lon))/2,
+					content: '<div class="overlay">' + distance + '<br/>' + duration + '</div>'
+				});
+			}
+		});
+	}
+	drawTargetDescription = function (target){
+		if(target.image != undefined && target.image != '')
+			var image = target.image;
+		else
+			var image = '/location_images/images/default.jpg';
+		$('#spotInfo .itemImage').html("<img src='http://pulpulak.club" + image + "' />");
+		$('#spotInfo .itemName').html(target.name);
+		$('#spotInfo .itemLocationText').html(target.address);
+		$('#spotInfo .itemInfoText').html(target.description);
+	}
 });
-pulpulakDestination = function (originLat, originLon, lat, lon){
-	map.drawRoute({
-		origin: [originLat, originLon],
-		destination: [lat, lon],
-		travelMode: 'walking',
-		strokeColor: '#131540',
-		strokeOpacity: 0.6,
-		strokeWeight: 6,
-		callback: function(e) {
-			legs = e.legs[0];
-			var distance = legs.distance.text;
-			var duration = legs.duration.text;
-			var steps = Math.round(legs.steps.length/2);
-			var middlePoint = legs.steps[steps];
-			map.drawOverlay({
-				lat: (originLat + parseFloat(lat))/2,
-				lng: (originLon + parseFloat(lon))/2,
-				content: '<div class="overlay">' + distance + '<br/>' + duration + '</div>'
-			});
-		}
-	});
-}
-drawTargetDescription = function (target){
-	if(target.image != undefined && target.image != '')
-		var image = target.image;
-	else
-		var image = '/location_images/images/default.jpg';
-	$('#spotInfo .itemImage').html("<img src='http://pulpulak.club" + image + "' />");
-	$('#spotInfo .itemName').html(target.name);
-	$('#spotInfo .itemLocationText').html(target.address);
-	$('#spotInfo .itemInfoText').html(target.description);
-}

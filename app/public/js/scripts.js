@@ -19,9 +19,10 @@ $(document).ready(function(){
 			function( data ) {
 
 		        if (data.length != 0) {
-					map.setCenter(parseFloat(data[0].lat), parseFloat(data[0].lon));
+					map.setCenter((position.coords.latitude + parseFloat(data[0].lat))/2, (position.coords.longitude + parseFloat(data[0].lon))/2);
 					pulpulakDestination(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon);
 					drawTargetDescription(data[0]);
+					var targets = [];
 					$.each(data, function(k, v){
 						map.addMarker({
 							lat: v.lat,
@@ -34,7 +35,11 @@ $(document).ready(function(){
 								pulpulakDestination(position.coords.latitude, position.coords.longitude, e.position.lat(), e.position.lng());
 							}
 						});
+						targets.push(new google.maps.LatLng(v.lat, v.lon));
+						console.log(targets, 'targets');
 					});
+
+					map.fitLatLngBounds(targets);
 				}
 			});
 		},

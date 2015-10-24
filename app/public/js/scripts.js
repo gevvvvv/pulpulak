@@ -32,7 +32,7 @@ $(document).ready(function(){
 								map.cleanRoute();
 								map.removeOverlays();
 								drawTargetDescription(v);
-								pulpulakDestination(position.coords.latitude, position.coords.longitude, e.position.H, e.position.L);
+								pulpulakDestination(position.coords.latitude, position.coords.longitude, e.position.lat(), e.position.lng());
 							}
 						});
 					});

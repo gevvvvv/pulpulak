@@ -19,7 +19,6 @@ $(document).ready(function(){
 			function( data ) {
 
 		        if (data.length != 0) {
-					map.setCenter((position.coords.latitude + parseFloat(data[0].lat))/2, (position.coords.longitude + parseFloat(data[0].lon))/2);
 					pulpulakDestination(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon);
 					drawTargetDescription(data[0]);
 					var targets = [];
@@ -44,7 +43,27 @@ $(document).ready(function(){
 			});
 		},
 		error: function(error) {
-			alert('Geolocation failed: '+ error.message);
+			$.get( "http://pulpulak.club/locations?lat=0&lon=0", 
+			function( data ) {
+		        if (data.length != 0) {
+					drawTargetDescription(data[0]);
+					var targets = [];
+					$.each(data, function(k, v){
+						map.addMarker({
+							lat: v.lat,
+							lng: v.lon,
+							icon: "/images/pul_redsm.png",
+							click: function(e) {
+								map.cleanRoute();
+								map.removeOverlays();
+								drawTargetDescription(v);
+							}
+						});
+						targets.push(new google.maps.LatLng(v.lat, v.lon));
+					});
+					map.fitLatLngBounds(targets);
+				}
+			});
 		},
 		not_supported: function() {
 			alert("Your browser does not support geolocation");

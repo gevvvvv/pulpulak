@@ -14,56 +14,11 @@ $(document).ready(function(){
 				lng: position.coords.longitude,
 				icon: "/images/you.png"
 			});
-
-			$.get( "http://pulpulak.club/locations?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude, 
-			function( data ) {
-
-		        if (data.length != 0) {
-					pulpulakDestination(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon);
-					drawTargetDescription(data[0]);
-					var targets = [];
-					$.each(data, function(k, v){
-						map.addMarker({
-							lat: v.lat,
-							lng: v.lon,
-							icon: "/images/pul_redsm.png",
-							click: function(e) {
-								map.cleanRoute();
-								map.removeOverlays();
-								drawTargetDescription(v);
-								pulpulakDestination(position.coords.latitude, position.coords.longitude, e.position.lat(), e.position.lng());
-							}
-						});
-						targets.push(new google.maps.LatLng(v.lat, v.lon));
-						console.log(targets, 'targets');
-					});
-
-					map.fitLatLngBounds(targets);
-				}
-			});
+			drawTargets(position.coords.latitude, position.coords.longitude);
 		},
 		error: function(error) {
-			$.get( "http://pulpulak.club/locations?lat=0&lon=0", 
-			function( data ) {
-		        if (data.length != 0) {
-					drawTargetDescription(data[0]);
-					var targets = [];
-					$.each(data, function(k, v){
-						map.addMarker({
-							lat: v.lat,
-							lng: v.lon,
-							icon: "/images/pul_redsm.png",
-							click: function(e) {
-								map.cleanRoute();
-								map.removeOverlays();
-								drawTargetDescription(v);
-							}
-						});
-						targets.push(new google.maps.LatLng(v.lat, v.lon));
-					});
-					map.fitLatLngBounds(targets);
-				}
-			});
+			alert('Geolocation failed: '+ error.message);
+			drawTargets(0, 0);
 		},
 		not_supported: function() {
 			alert("Your browser does not support geolocation");
@@ -72,6 +27,7 @@ $(document).ready(function(){
 		}
 	});
 	pulpulakDestination = function (originLat, originLon, lat, lon){
+		if(originLat !=0 && originLon != 0)
 		map.drawRoute({
 			origin: [originLat, originLon],
 			destination: [lat, lon],
@@ -102,5 +58,33 @@ $(document).ready(function(){
 		$('#spotInfo .itemName').html(target.name);
 		$('#spotInfo .itemLocationText').html(target.address);
 		$('#spotInfo .itemInfoText').html(target.description);
+	}
+	drawTargets = function (latitude, longitude){
+		$.get( "http://pulpulak.club/locations?lat=" + latitude + "&lon=" + longitude, 
+		function( data ) {
+
+	        if (data.length != 0) {
+				pulpulakDestination(latitude, longitude, data[0].lat, data[0].lon);
+				drawTargetDescription(data[0]);
+				var targets = [];
+				$.each(data, function(k, v){
+					map.addMarker({
+						lat: v.lat,
+						lng: v.lon,
+						icon: "/images/pul_redsm.png",
+						click: function(e) {
+							map.cleanRoute();
+							map.removeOverlays();
+							drawTargetDescription(v);
+							pulpulakDestination(latitude, longitude, e.position.lat(), e.position.lng());
+						}
+					});
+					targets.push(new google.maps.LatLng(v.lat, v.lon));
+					console.log(targets, 'targets');
+				});
+
+				map.fitLatLngBounds(targets);
+			}
+		});
 	}
 });

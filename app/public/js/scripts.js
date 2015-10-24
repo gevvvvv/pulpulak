@@ -55,7 +55,7 @@ $(document).ready(function(){/* google maps ------------------------------------
               console.log(gCoordinates);
               map.fitLatLngBounds(gCoordinates);
 
-              pulpulakDestination(data[0].lat, data[0].lon);
+              pulpulakDestination(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon);
             }
           }
         });
@@ -64,7 +64,7 @@ $(document).ready(function(){/* google maps ------------------------------------
 
           map.setCenter((position.coords.latitude + parseFloat(data[0].lat))/2, (position.coords.longitude + parseFloat(data[0].lon))/2);
           
-          pulpulakDestination(data[0].lat, data[0].lon);
+          pulpulakDestination(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon);
           //http://pulpulak.club/locations
           if(data[0].image != undefined && data[0].image !='')
             var image = data[0].image;
@@ -93,7 +93,7 @@ $(document).ready(function(){/* google maps ------------------------------------
                 //$('.overlay').remove();
                 console.log(e.position,'testing');
                 var clickedPosition = e.position;
-                pulpulakDestination(e.position.H, e.position.L);
+                pulpulakDestination(position.coords.latitude, position.coords.longitude, e.position.H, e.position.L);
               }
             });
           });
@@ -126,9 +126,9 @@ $(document).ready(function(){/* google maps ------------------------------------
     }
   });
 
-pulpulakDestination = function (lat, lon){
+pulpulakDestination = function (originLat, originLon, lat, lon){
 	map.drawRoute({
-		origin: [position.coords.latitude, position.coords.longitude],
+		origin: [originLat, originLon],
 		destination: [lat, lon],
 		travelMode: 'walking',
 		strokeColor: '#131540',
@@ -141,8 +141,8 @@ pulpulakDestination = function (lat, lon){
 			var steps = Math.round(legs.steps.length/2);
 			var middlePoint = legs.steps[steps];
 			map.drawOverlay({
-				lat: (position.coords.latitude + parseFloat(lat))/2,
-				lng: (position.coords.longitude + parseFloat(lon))/2,
+				lat: (originLat + parseFloat(lat))/2,
+				lng: (originLon + parseFloat(lon))/2,
 				content: '<div class="overlay">' + distance + '<br/>' + duration + '</div>'
 			});
 		}

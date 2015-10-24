@@ -50,7 +50,7 @@ $(document).ready(function(){
 			alert("Your browser does not support geolocation");
 		},
 		always: function() {
-			// alert("Done!");
+			console.log(position, 'position');
 		}
 	});
 	pulpulakDestination = function (originLat, originLon, lat, lon){

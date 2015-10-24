@@ -78,7 +78,6 @@ $(document).ready(function(){
 						}
 					});
 					targets.push(new google.maps.LatLng(v.lat, v.lon));
-					console.log(targets, 'targets');
 				});
 
 				map.fitLatLngBounds(targets);

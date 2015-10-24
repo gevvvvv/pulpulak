@@ -17,7 +17,6 @@ class Location extends Model
         $locations = null;
 
         $locations = Location::select(DB::raw("*, (6371 * acos(cos(radians(?)) * cos(radians(lat)) * cos(radians(lon) - radians(?)) + sin(radians(?)) * sin(radians(lat)))) AS distance"))
-            ->having("distance", "<", $radius)
             ->orderBy("distance")
             ->setBindings([$lat, $lon, $lat])
             ->get();

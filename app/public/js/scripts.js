@@ -17,30 +17,6 @@ $(document).ready(function(){
 
 			$.get( "http://pulpulak.club/locations?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude, 
 			function( data ) {
-		        map.addControl({
-					position: 'top_right',
-					content: '<img src="/images/refresh.png" />',
-					style: {
-						margin: '10px',
-						'border-radius': '20px',
-						'box-shadow': '2px 2px 2px #666',
-						'display' : 'none'
-					},
-					events: {
-					click: function(){
-						map.cleanRoute();
-						map.removeOverlays();
-						var gCoordinates = [
-							new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-							new google.maps.LatLng(data[0].lat, data[0].lon)
-						];
-						map.fitLatLngBounds(gCoordinates);
-						drawTargetDescription(data[0]);
-						console.log(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon,'position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon');
-						pulpulakDestination(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon);
-					}
-					}
-		        });
 
 		        if (data.length != 0) {
 					map.setCenter((position.coords.latitude + parseFloat(data[0].lat))/2, (position.coords.longitude + parseFloat(data[0].lon))/2);
@@ -52,6 +28,7 @@ $(document).ready(function(){
 							lng: v.lon,
 							icon: "/images/pul_redsm.png",
 							click: function(e) {
+								console.log(position.coords.latitude, position.coords.longitude, e.position.H, e.position.L,'position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon');
 								map.cleanRoute();
 								map.removeOverlays();
 								drawTargetDescription(v);

@@ -8,8 +8,6 @@ $(document).ready(function(){
 
 	GMaps.geolocate({
 	    success: function(position) {
-			my_lat = position.coords.latitude,
-			my_lng = position.coords.longitude,
 
 			map.addMarker({
 				lat: position.coords.latitude,
@@ -32,12 +30,13 @@ $(document).ready(function(){
 					click: function(){
 						map.cleanRoute();
 						map.removeOverlays();
-						drawTargetDescription(data[0]);
 						var gCoordinates = [
 							new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
 							new google.maps.LatLng(data[0].lat, data[0].lon)
 						];
 						map.fitLatLngBounds(gCoordinates);
+						drawTargetDescription(data[0]);
+						console.log(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon,'position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon');
 						pulpulakDestination(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon);
 					}
 					}

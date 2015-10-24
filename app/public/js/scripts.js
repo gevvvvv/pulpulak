@@ -1,8 +1,6 @@
 $(document).ready(function(){
 	var map = new GMaps({
 		div: '#map-canvas',
-		lat: 0,
-		lng: 0,
 		disableDefaultUI: true
 	});
 

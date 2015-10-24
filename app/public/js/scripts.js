@@ -19,7 +19,7 @@ $(document).ready(function(){
 			function( data ) {
 
 		        if (data.length != 0) {
-					map.setCenter((position.coords.latitude + parseFloat(data[0].lat))/2, (position.coords.longitude + parseFloat(data[0].lon))/2);
+					map.setCenter(parseFloat(data[0].lat), parseFloat(data[0].lon));
 					pulpulakDestination(position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon);
 					drawTargetDescription(data[0]);
 					$.each(data, function(k, v){
@@ -28,7 +28,6 @@ $(document).ready(function(){
 							lng: v.lon,
 							icon: "/images/pul_redsm.png",
 							click: function(e) {
-								console.log(position.coords.latitude, position.coords.longitude, e,'position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon');
 								map.cleanRoute();
 								map.removeOverlays();
 								drawTargetDescription(v);
@@ -36,13 +35,6 @@ $(document).ready(function(){
 							}
 						});
 					});
-
-					var gCoordinates = [
-						new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-						new google.maps.LatLng(data[0].lat, data[0].lon)
-					];
-
-					map.fitLatLngBounds(gCoordinates);
 				}
 			});
 		},

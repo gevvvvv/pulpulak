@@ -1,7 +1,4 @@
 $(document).ready(function(){
-	var my_lat = 0;
-	var my_lng = 0;
-	var legs;
 	var map = new GMaps({
 		div: '#map-canvas',
 		lat: 0,
@@ -20,7 +17,8 @@ $(document).ready(function(){
 				icon: "/images/you.png"
 			});
 
-			$.get( "http://pulpulak.club/locations?lat="+my_lat+"&lon="+my_lng, function( data ) {
+			$.get( "http://pulpulak.club/locations?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude, 
+			function( data ) {
 		        map.addControl({
 					position: 'top_right',
 					content: '<img src="/images/refresh.png" />',

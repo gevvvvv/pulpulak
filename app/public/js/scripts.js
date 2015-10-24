@@ -28,7 +28,7 @@ $(document).ready(function(){
 							lng: v.lon,
 							icon: "/images/pul_redsm.png",
 							click: function(e) {
-								console.log(position.coords.latitude, position.coords.longitude, e.position.H, e.position.L,'position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon');
+								console.log(position.coords.latitude, position.coords.longitude, e,'position.coords.latitude, position.coords.longitude, data[0].lat, data[0].lon');
 								map.cleanRoute();
 								map.removeOverlays();
 								drawTargetDescription(v);

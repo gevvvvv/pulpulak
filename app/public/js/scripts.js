@@ -25,8 +25,7 @@ $(document).ready(function(){/* google maps ------------------------------------
             icon: "/images/you.png"
           });
 
-      $.get( "http://pulpulak.club/locations?lat="+my_lat+"&lon="+my_lng, function( data ) {
-
+		$.get( "http://pulpulak.club/locations?lat="+my_lat+"&lon="+my_lng, function( data ) {
         map.addControl({
           position: 'top_right',
           content: '<img src="/images/refresh.png" />',
@@ -56,27 +55,7 @@ $(document).ready(function(){/* google maps ------------------------------------
               console.log(gCoordinates);
               map.fitLatLngBounds(gCoordinates);
 
-              map.drawRoute({
-                origin: [position.coords.latitude, position.coords.longitude],
-                destination: [data[0].lat, data[0].lon],
-                travelMode: 'walking',
-                strokeColor: '#131540',
-                strokeOpacity: 0.6,
-                strokeWeight: 6,
-                callback: function(e) {
-                  legs = e.legs[0];
-                  var distance = legs.distance.text;
-                  var duration = legs.duration.text;
-                  var steps = Math.round(legs.steps.length/2);
-                  var middlePoint = legs.steps[steps];
-                  console.log(position.coords.latitude,data[0].lat,'entered');
-                  map.drawOverlay({
-                    lat: (position.coords.latitude + parseFloat(data[0].lat))/2,
-                    lng: (position.coords.longitude + parseFloat(data[0].lon))/2,
-                    content: '<div class="overlay">' + distance + '<br/>' + duration + '</div>'
-                  });
-                }
-              });
+              pulpulakDestination(data[0].lat, data[0].lon);
             }
           }
         });
@@ -84,27 +63,8 @@ $(document).ready(function(){/* google maps ------------------------------------
         if (data.length != 0) {
 
           map.setCenter((position.coords.latitude + parseFloat(data[0].lat))/2, (position.coords.longitude + parseFloat(data[0].lon))/2);
-          console.log('test',data[0].lat, data[0].lon);
-          var route = map.drawRoute({
-            origin: [position.coords.latitude, position.coords.longitude],
-            destination: [data[0].lat, data[0].lon],
-            travelMode: 'walking',
-            strokeColor: '#131540',
-            strokeOpacity: 0.6,
-            strokeWeight: 6,
-            callback: function(e) {
-              legs = e.legs[0];
-              var distance = legs.distance.text;
-              var duration = legs.duration.text;
-              var steps = Math.round(legs.steps.length/2);
-              var middlePoint = legs.steps[steps];
-              map.drawOverlay({
-                lat: (position.coords.latitude + parseFloat(data[0].lat))/2,
-                lng: (position.coords.longitude + parseFloat(data[0].lon))/2,
-                content: '<div class="overlay">' + distance + '<br/>' + duration + '</div>'
-              });
-            }
-          });
+          
+          pulpulakDestination(data[0].lat, data[0].lon);
           //http://pulpulak.club/locations
           if(data[0].image != undefined && data[0].image !='')
             var image = data[0].image;
@@ -133,27 +93,7 @@ $(document).ready(function(){/* google maps ------------------------------------
                 //$('.overlay').remove();
                 console.log(e.position,'testing');
                 var clickedPosition = e.position;
-                map.drawRoute({
-                  origin: [position.coords.latitude, position.coords.longitude],
-                  destination: [e.position.H, e.position.L],
-                  travelMode: 'walking',
-                  strokeColor: '#131540',
-                  strokeOpacity: 0.6,
-                  strokeWeight: 6,
-                  callback: function(e) {
-                    legs = e.legs[0];
-                    var distance = legs.distance.text;
-                    var duration = legs.duration.text;
-                    var steps = Math.round(legs.steps.length/2);
-                    var middlePoint = legs.steps[steps];
-                    map.drawOverlay({
-                      lat: (position.coords.latitude + clickedPosition.H)/2,
-                      lng: (position.coords.longitude + clickedPosition.L)/2,
-                      content: '<div class="overlay">' + distance + '<br/>' + duration + '</div>'
-                    });
-                    var flagLatlng = new google.maps.LatLng(clickedPosition.H, clickedPosition.L);
-                  }
-                });
+                pulpulakDestination(e.position.H, e.position.L);
               }
             });
           });
@@ -186,30 +126,27 @@ $(document).ready(function(){/* google maps ------------------------------------
     }
   });
 
-
-
-  // google.maps.event.addDomListener(window, 'load', initialize);
-
-  // function initialize() {
-
-  //   /* position Amsterdam */
-  //   var latlng = new google.maps.LatLng(52.3731, 4.8922);
-
-  //   var mapOptions = {
-  //     center: latlng,
-  //     scrollWheel: false,
-  //     zoom: 13
-  //   };
-
-  //   var marker = new google.maps.Marker({
-  //     position: latlng,
-  //     url: '/',
-  //     animation: google.maps.Animation.DROP
-  //   });
-
-  //   var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-  //   marker.setMap(map);
-
-  // };
+pulpulakDestination = function (lat, lon){
+	map.drawRoute({
+		origin: [position.coords.latitude, position.coords.longitude],
+		destination: [lat, lon],
+		travelMode: 'walking',
+		strokeColor: '#131540',
+		strokeOpacity: 0.6,
+		strokeWeight: 6,
+		callback: function(e) {
+			legs = e.legs[0];
+			var distance = legs.distance.text;
+			var duration = legs.duration.text;
+			var steps = Math.round(legs.steps.length/2);
+			var middlePoint = legs.steps[steps];
+			map.drawOverlay({
+				lat: (position.coords.latitude + parseFloat(lat))/2,
+				lng: (position.coords.longitude + parseFloat(lon))/2,
+				content: '<div class="overlay">' + distance + '<br/>' + duration + '</div>'
+			});
+		}
+	});
+}
 
 });

@@ -69,7 +69,6 @@ $(document).ready(function(){
 			alert("Your browser does not support geolocation");
 		},
 		always: function() {
-			console.log(position, 'position');
 		}
 	});
 	pulpulakDestination = function (originLat, originLon, lat, lon){
